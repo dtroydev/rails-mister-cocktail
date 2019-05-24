@@ -8,6 +8,9 @@
         <% if @cocktail.image_url %>
           <%= image_tag @cocktail.image_url, width: '350px', height: '350px', class: 'mb-3'%>
         <% end %>
+        <% unless @cocktail.photo.file.nil? %>
+          <%= cl_image_tag @cocktail.photo, height: 350, width: 350, crop: :fill %>
+        <% end %>
         <p><%= @cocktail.instructions %></p>
         <% @cocktail.doses.each do |dose| %>
           <p><strong><%= dose.description %></strong> - <%= dose.ingredient.name %>
@@ -21,7 +24,7 @@
         <%= link_to 'Back', :back, class: 'btn btn-primary' %>
       </div>
     </div>
-    <div class="div">
+    <div class="div mt-3">
       <%= simple_form_for([@cocktail, @dose]) do |f| %>
         <%= f.input :description %>
         <%= f.association :ingredient, include_blank: false %>

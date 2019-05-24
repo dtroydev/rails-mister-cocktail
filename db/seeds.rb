@@ -6,6 +6,12 @@ INGREDIENTS = 'list.php?i=list'.freeze
 COCKTAILS = 'filter.php?c=Cocktail'.freeze
 COCKTAIL = 'lookup.php?i='.freeze
 
+cocktails__cache = {}
+
+define_method :cocktails_cache do
+  cocktails__cache
+end
+
 def cdb_ingredients
   ingredients_json = URI.open("#{COCKTAIL_DB_API}#{INGREDIENTS}").read
   ingredients = JSON.parse(ingredients_json)['drinks']
@@ -16,14 +22,25 @@ def cdb_ingredients
 end
 
 def cdb_cocktail(cocktail_db_id)
+  return cocktails_cache[cocktail_db_id] if cocktails_cache.key?(cocktail_db_id)
+
   cocktail_details_url = "#{COCKTAIL_DB_API}#{COCKTAIL}#{cocktail_db_id}"
-  JSON.parse(URI.open(cocktail_details_url).read)['drinks'][0]
+  cocktail = JSON.parse(URI.open(cocktail_details_url).read)['drinks'][0]
+  cocktails_cache[cocktail_db_id] = cocktail
+  cocktail
 end
+
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 
 def cdb_cocktails
   cocktails_json = URI.open("#{COCKTAIL_DB_API}#{COCKTAILS}").read
   cocktails = JSON.parse(cocktails_json)['drinks']
+  total = cocktails.length
+  counter = 0
   converted_cocktails = cocktails.map do |cocktail|
+    puts "Cocktail Setup #{counter + 1} / #{total} done."
+    counter += 1
     { name: cocktail['strDrink'],
       image_url: cocktail['strDrinkThumb'],
       instructions: cdb_cocktail(cocktail['idDrink'])['strInstructions'],
@@ -32,11 +49,11 @@ def cdb_cocktails
   converted_cocktails
 end
 
+puts 'Seeding Ingredients...'
 Ingredient.create(cdb_ingredients)
-Cocktail.create(cdb_cocktails)
 
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
+puts 'Seeding Cocktails...'
+Cocktail.create(cdb_cocktails)
 
 def cdb_cocktail_doses(cocktail_db_id, cocktail_id)
   doses = []
@@ -70,9 +87,14 @@ end
 # rubocop:enable Metrics/AbcSize
 
 def cdb_doses
+  counter = 0
+  total = Cocktail.count
   Cocktail.all.each do |cocktail|
     Dose.create(cdb_cocktail_doses(cocktail.cocktail_db_id, cocktail.id))
+    puts "Dose(s) for Cocktail #{counter + 1} / #{total} done."
+    counter += 1
   end
 end
 
+puts 'Seeding Doses...'
 cdb_doses
