@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row flex-column align-items-center mt-3">
+    <div class="card border-dark" style="width:400px">
+      <div class="card-title text-center mt-3">
+        <h4><%= @cocktail.name %></h4>
+      </div>
+      <div class="card-body">
+        <%= image_tag @cocktail.image_url, width: '350px', height: '350px', class: 'mb-3'%>
+        <p><%= @cocktail.instructions %></p>
+        <% @cocktail.doses.each do |dose| %>
+          <p><strong><%= dose.description %></strong> - <%= dose.ingredient.name %>
+            - <%= link_to dose, method: :delete do %>
+              <i class="far fa-trash-alt text-danger"></i>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+      <div class="text-center mb-3">
+        <%= link_to 'Back', :back, class: 'btn btn-primary' %>
+      </div>
+    </div>
+    <div class="div">
+      <%= simple_form_for([@cocktail, @dose]) do |f| %>
+        <%= f.input :description %>
+        <%= f.association :ingredient, include_blank: false %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
