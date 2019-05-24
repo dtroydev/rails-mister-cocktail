@@ -48,7 +48,7 @@ def cdb_cocktail_doses(cocktail_db_id, cocktail_id)
     next if !ingredient || ingredient.empty?
 
     measure = cocktail["strMeasure#{n + 1}"]
-    description = "#{measure}#{ingredient}".strip
+    description = measure.to_s.strip
     ingredient_lookup = Ingredient.where(name: ingredient).first
     # some cocktails have ingredients that are not in the ingredient list
     if ingredient_lookup.nil?
