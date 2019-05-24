@@ -5,7 +5,9 @@
         <h4><%= @cocktail.name %></h4>
       </div>
       <div class="card-body">
-        <%= image_tag @cocktail.image_url, width: '350px', height: '350px', class: 'mb-3'%>
+        <% if @cocktail.image_url %>
+          <%= image_tag @cocktail.image_url, width: '350px', height: '350px', class: 'mb-3'%>
+        <% end %>
         <p><%= @cocktail.instructions %></p>
         <% @cocktail.doses.each do |dose| %>
           <p><strong><%= dose.description %></strong> - <%= dose.ingredient.name %>
