@@ -1,35 +1,45 @@
-<div class="container">
-  <div class="row flex-column align-items-center mt-3">
-    <div class="card border-dark" style="width:400px">
-      <div class="card-title text-center mt-3">
-        <h4><%= @cocktail.name %></h4>
-      </div>
-      <div class="card-body">
+<div class="cocktails-background">
+  <div class="cocktails-show container">
+    <div class="row justify-content-around">
+      <div class="cocktails-show-image-box">
         <% if @cocktail.image_url %>
-          <%= image_tag @cocktail.image_url, width: '350px', height: '350px', class: 'mb-3'%>
+          <%= image_tag @cocktail.image_url, width: 600 %>
         <% end %>
         <% unless @cocktail.photo.file.nil? %>
           <%= cl_image_tag @cocktail.photo, height: 350, width: 350, crop: :fill %>
         <% end %>
-        <p><%= @cocktail.instructions %></p>
-        <% @cocktail.doses.each do |dose| %>
-          <p><strong><%= dose.description %></strong> - <%= dose.ingredient.name %>
-            - <%= link_to dose, method: :delete do %>
-              <i class="far fa-trash-alt text-danger"></i>
+      </div>
+      <div class="cocktails-show-description card" style="width: 400px">
+        <div class="card-title text-center mt-3 px-1 pt-3">
+          <h3 class="cocktails-show-title"><%= @cocktail.name %></h3>
+        </div>
+        <div class="card-body">
+          <p><%= @cocktail.instructions %></p>
+          <% @cocktail.doses.each do |dose| %>
+            <p>
+              <span class="ingredient-name ml-3"><%= dose.ingredient.name %> </span>
+              <span class="ingredient-quantity">(<%= dose.description %>) </span>
+              <%= link_to dose, method: :delete, class: 'ingredient-delete mr-3' do %>
+                <i class="far fa-trash-alt text-danger"></i>
+              <% end %>
+            </p>
+          <% end %>
+          <div class="div mt-3">
+            <%= simple_form_for([@cocktail, @dose]) do |f| %>
+              <%= f.input :quantity, placeholder: 'Enter Quantity' %>
+              <%= f.input :measure, collection: Dose::MEASURES, placeholder: 'Enter Measure' %>
+              <%= f.input :variety, collection: Dose::VARIETIES %>
+              <%= f.association :ingredient,
+                              include_blank: false,
+                              collection: Ingredient.order('name ASC') %>
+              <%= f.button :submit, class: 'btn cocktails-show-submit' %>
             <% end %>
-          </p>
-        <% end %>
+            <div class="back-link">
+              <%= link_to 'Back to Cocktails', root_path, class: 'btn cocktails-show-back-link' %>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="text-center mb-3">
-        <%= link_to 'Back', :back, class: 'btn btn-primary' %>
-      </div>
-    </div>
-    <div class="div mt-3">
-      <%= simple_form_for([@cocktail, @dose]) do |f| %>
-        <%= f.input :description %>
-        <%= f.association :ingredient, include_blank: false %>
-        <%= f.submit %>
-      <% end %>
     </div>
   </div>
 </div>
