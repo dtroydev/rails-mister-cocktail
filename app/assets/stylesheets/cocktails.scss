@@ -39,7 +39,7 @@ a {
 
 .banner {
   height: 500px;
-  background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), url('bar-banner.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)), image-url('bar-banner.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -50,7 +50,7 @@ a {
 }
 
 .cocktails-background {
-  background: linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), url('cocktails-background.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.90)), image-url('cocktails-background.jpg');
   background-size: 400px 400px;
   // height: 100%
 }
