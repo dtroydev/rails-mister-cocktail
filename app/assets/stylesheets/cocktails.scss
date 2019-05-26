@@ -99,6 +99,7 @@ span {
   // height: 100%
 }
 
+
 .cocktails-show {
   abbr[title="required"] {
     display: none;
@@ -234,6 +235,28 @@ span {
     color: white;
     width: 162px;
   }
+
+  .image-box {
+    position: relative;
+  }
+
+  .review-average {
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    width: 100%
+  }
+
+  .full-star {
+    color: $gold;
+    text-shadow: 2px 2px 5px $black;
+  }
+
+  .empty-star {
+    color: $gold;
+    text-shadow: 2px 2px 5px $black;
+  }
+
 }
 
 .cocktails-new {

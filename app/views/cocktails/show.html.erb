@@ -20,10 +20,10 @@
                 <div class="review mb-5">
                   <p class="review-content"><%= review.content %></p>
                   <p>
-                    <% review.rating.to_i.times do  %>
+                    <% review.rating.times do  %>
                       <i class="full-star fas fa-star"></i>
                     <% end %>
-                    <% (Review::RATINGS.length - review.rating - 1).to_i.times do  %>
+                    <% (Review::RATINGS.length - review.rating - 1).times do  %>
                       <i class="empty-star far fa-star"></i>
                     <% end %>
                   </p>
