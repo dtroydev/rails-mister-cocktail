@@ -20,14 +20,20 @@ if (submitButton) {
   div.appendChild(backButton);
 
   // initialise select2 controls
-  $('#dose_ingredient_id').select2({});
+  $('#dose_ingredient_id').select2({
+    placeholder: 'Choose ingredient',
+  });
   $('#dose_measure').select2({
-    placeholder: 'choose measure',
+    placeholder: 'Choose measure',
   });
   $('#dose_variety').select2({
-    placeholder: 'optional variety',
+    placeholder: 'Choose variety (optional)',
     allowClear: true,
   });
+
+  // disable fixed top navbar (until we work out scrolling issues)
+  const navbar = document.querySelector('#navbar');
+  navbar.classList.remove('fixed-top');
 }
 
 // banner scrolling text on the cocktail index page
@@ -43,7 +49,7 @@ if (document.querySelector('.banner-typed')) {
       "It's ok, I won't judge you",
       "Let's figure out what we are going to drink next?",
       'I am thirsty, are you thirsty?',
-      'Perhaps a martini to get started with?',
+      "Let's have a martini, shall we?",
     ],
     typeSpeed: 50,
     showCursor: false,

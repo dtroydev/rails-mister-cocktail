@@ -13,7 +13,7 @@
         <div class="card-title text-center mt-3 px-1 pt-3">
           <h3 class="cocktails-show-title"><%= @cocktail.name %></h3>
         </div>
-        <div class="card-body">
+        <div class="cocktail-instructions card-body">
           <p><%= @cocktail.instructions %></p>
           <% @cocktail.doses.each do |dose| %>
             <p>
@@ -24,18 +24,17 @@
               <% end %>
             </p>
           <% end %>
+          <h4 class="dose-heading mt-4 mb-3">Add a Dose</h4>
           <div class="div mt-3">
             <%= simple_form_for([@cocktail, @dose]) do |f| %>
-              <%= f.input :quantity, placeholder: 'Enter Quantity' %>
-              <%= f.input :measure, collection: Dose::MEASURES, placeholder: 'Enter Measure' %>
+              <%= f.input :quantity, label: 'Quantity *', placeholder: 'Enter Quantity' %>
+              <%= f.input :measure, label: 'Measure *', collection: Dose::MEASURES%>
               <%= f.input :variety, collection: Dose::VARIETIES %>
-              <%= f.association :ingredient,
-                              include_blank: false,
-                              collection: Ingredient.order('name ASC') %>
+              <%= f.input :ingredient_id, label: 'Ingredient *', collection: Ingredient.order('name ASC') %>
               <%= f.button :submit, class: 'btn cocktails-show-submit' %>
             <% end %>
             <div class="back-link">
-              <%= link_to 'Back to Cocktails', root_path, class: 'btn cocktails-show-back-link' %>
+              <%= link_to 'Go Back', root_path, class: 'btn cocktails-show-back-link' %>
             </div>
           </div>
         </div>
