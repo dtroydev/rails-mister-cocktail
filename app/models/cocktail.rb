@@ -3,6 +3,7 @@ class Cocktail < ApplicationRecord
 
   has_many :doses, -> { order(created_at: :asc) }, dependent: :destroy
   has_many :ingredients, through: :doses
+  has_many :reviews
 
   validates :name, presence: true, uniqueness: true
   # validates :image_url, presence: true

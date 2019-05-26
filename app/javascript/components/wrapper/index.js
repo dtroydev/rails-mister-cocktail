@@ -1,13 +1,14 @@
 // wrap dose submit button (cocktail show page) into a div so it can be centered
-const wrapper = (el, wrapperElement) => {
-  el.parentNode.insertBefore(wrapperElement, el);
-  wrapperElement.appendChild(el);
-  return wrapperElement;
+
+const wrap = (selector) => {
+  const element = document.querySelector(selector);
+  const wrappingDiv = document.createElement('div');
+  element.parentNode.insertBefore(wrappingDiv, element);
+  wrappingDiv.appendChild(element);
+  wrappingDiv.classList.add('row', 'justify-content-around');
 };
 
 export default () => {
-  const submitButton = document.querySelector('.simple_form.new_dose .btn');
-  const wrappingDiv = document.createElement('div');
-  const div = wrapper(submitButton, wrappingDiv);
-  div.classList.add('row', 'justify-content-around');
+  wrap('.cocktails-show-submit-dose');
+  wrap('.cocktails-show-submit-review');
 };

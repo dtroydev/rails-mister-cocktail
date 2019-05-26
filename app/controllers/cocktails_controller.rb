@@ -9,6 +9,7 @@ class CocktailsController < ApplicationController
     @dose = Dose.new
     @dose.quantity = ''
     @dose.measure = ''
+    @review = Review.new
   end
 
   def new

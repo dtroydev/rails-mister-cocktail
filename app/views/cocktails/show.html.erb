@@ -7,11 +7,43 @@
             <%= image_tag @cocktail.image_url, width: 600 %>
           <% end %>
           <% unless @cocktail.photo.file.nil? %>
-            <%= cl_image_tag @cocktail.photo, height: 350, width: 350, crop: :fill %>
+            <%= cl_image_tag @cocktail.photo, width: 600, crop: :fill %>
           <% end %>
         </div>
         <div class="back-link text-center">
           <%= link_to 'Back to Cocktails List', root_path, class: 'btn cocktails-show-back-link' %>
+        </div>
+        <div class="cocktails-review-form card">
+          <div class="card-body">
+            <div class="reviews">
+              <% @cocktail.reviews.each do |review| %>
+                <div class="review mb-5">
+                  <p class="review-content"><%= review.content %></p>
+                  <p>
+                    <% review.rating.to_i.times do  %>
+                      <i class="full-star fas fa-star"></i>
+                    <% end %>
+                    <% (Review::RATINGS.length - review.rating - 1).to_i.times do  %>
+                      <i class="empty-star far fa-star"></i>
+                    <% end %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <h4 class="dose-heading mt-4 mb-3">Add a Review</h4>
+            <div class="div mt-3">
+              <%= simple_form_for([@cocktail, @review]) do |f| %>
+                <%= f.input :content, label: 'Content *', placeholder: 'Enter Your Review' %>
+                <%#= f.input :rating, label: 'Rating *', collection: Review::RATINGS%>
+                <!-- method, collection, value_method, text_method, -->
+                <%= f.collection_radio_buttons :rating, Review::RATINGS, :to_i, :to_i %>
+                <% if @review.errors[:rating].present? %>
+                  <div class="form-input-error"><%= "Rating #{@review.errors[:rating][0]}" %></div>
+                <% end %>
+                <%= f.button :submit, class: 'btn cocktails-show-submit-review' %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="cocktails-show-description card" style="width: 500px">
@@ -36,7 +68,10 @@
               <%= f.input :measure, label: 'Measure *', collection: Dose::MEASURES%>
               <%= f.input :variety, collection: Dose::VARIETIES %>
               <%= f.input :ingredient_id, label: 'Ingredient *', collection: Ingredient.order('name ASC') %>
-              <%= f.button :submit, class: 'btn cocktails-show-submit' %>
+              <% if @dose.errors[:ingredient].present? %>
+                <div class="form-input-error"><%= "Ingredient #{@dose.errors[:ingredient][0]}" %></div>
+              <% end %>
+              <%= f.button :submit, class: 'btn cocktails-show-submit-dose' %>
             <% end %>
           </div>
         </div>

@@ -125,7 +125,7 @@ span {
     font-family: $input-font;
   }
 
-  .cocktails-show-submit {
+  .cocktails-show-submit-dose {
     font-size: 3rem;
     color: black;
     text-shadow: 1px 1px 10px $shadow-blue;
@@ -137,8 +137,52 @@ span {
     text-shadow: 1px 1px 10px $shadow-red;
   }
 
+  .cocktails-show-submit-review {
+    font-size: 3rem;
+    color: black;
+    text-shadow: 1px 1px 10px $shadow-blue;
+  }
+
   .cocktail-instructions {
     font-size: 1.75rem;
+  }
+
+  .cocktails-review-form {
+    width: 600px;
+  }
+
+  .collection_radio_buttons {
+    position: relative;
+    top: 0.2rem;
+    font-family: $input-font;
+    color: black;
+    margin-left: 0.5rem;
+    margin-right: 3rem;
+  }
+
+  .form-input-error {
+    color: red;
+  }
+
+  .reviews {
+    color: black;
+  }
+
+  .review-content {
+    font-size: 2rem;
+  }
+
+  #review_content {
+    font-size: 1.75rem;
+    font-family: $input-font;
+  }
+
+  .full-star {
+    color: $gold;
+  }
+
+  .empty-star {
+    color: $title-grey;
   }
 
   .ingredient-quantity {
@@ -161,8 +205,6 @@ span {
     text-decoration: underline;
     color: $title-grey;
   }
-
-
 
   .dose_quantity input.form-control {
     font-size: 1.75rem;
