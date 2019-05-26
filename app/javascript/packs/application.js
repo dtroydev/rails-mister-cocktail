@@ -19,3 +19,10 @@ if (document.querySelector('.cocktails-show')) {
   const navbar = document.querySelector('#navbar');
   navbar.classList.remove('fixed-top');
 }
+
+// ingredients index page
+if (document.querySelector('.ingredients-index')) {
+  // disable fixed top navbar
+  const navbar = document.querySelector('#navbar');
+  navbar.classList.remove('fixed-top');
+}

@@ -1,8 +1,7 @@
-<h1>Ingredients#index</h1>
-<div class="container">
+<div class="ingredients-index container">
   <div class="row">
-    <% @ingredients.each do |ingredient| %>
-      <div class="card">
+    <% @ingredients.order('name ASC').each do |ingredient| %>
+      <div class="card flex-grow-1">
         <div class="card-body">
           <%= ingredient.name %>
         </div>
