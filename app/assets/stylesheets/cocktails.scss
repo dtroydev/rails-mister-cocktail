@@ -20,6 +20,21 @@ a {
   }
 }
 
+input.form-control {
+  font-family: $input-font;
+}
+
+
+span {
+  &.select2 {
+    font-family: $input-font;
+  }
+
+  &.select2-results {
+    font-family: $input-font;
+  }
+}
+
 .select2-results {
   color: black;
 }
@@ -44,12 +59,22 @@ a {
   .navbar-main-link {
     font-size: 3.25rem;
     text-shadow: 1px 1px 10px $shadow-red;
+    opacity: 1;
+    transition: opacity 1s;
   }
 
   .navbar-create-cocktail-link {
     font-size: 2.5rem;
     text-shadow: 1px 1px 10px $shadow-blue;
+    opacity: 1;
+    transition: opacity 1s;
+
   }
+
+  .fadeout {
+    opacity: 0;
+  }
+
 }
 
 
@@ -94,17 +119,18 @@ a {
   .cocktails-show-title {
     font-size: 3rem;
     text-shadow: 1px 1px 10px $shadow-purple;
+    font-family: $input-font;
   }
 
   .cocktails-show-submit {
-    font-size: 2rem;
+    font-size: 3rem;
     color: black;
     text-shadow: 1px 1px 10px $shadow-blue;
   }
 
   .cocktails-show-back-link {
-    font-size: 2rem;
-    color: black;
+    font-size: 3rem;
+    color: white;
     text-shadow: 1px 1px 10px $shadow-red;
   }
 
@@ -120,6 +146,7 @@ a {
   .ingredient-name {
     font-size: 1.75rem;
     text-shadow: 1px 1px 10px $shadow-red;
+    font-family: $input-font;
   }
 
   .ingredient-delete {
@@ -156,9 +183,33 @@ a {
   }
 
   .cocktails-index-title {
+    font-family: $input-font;
     font-size: 1.5rem;
     text-shadow: 1px 1px 10px $shadow-red;
     color: white;
     width: 162px;
+  }
+}
+
+.cocktails-new {
+  font-size: 2rem;
+  color: black;
+
+  .cocktails-new-submit {
+    font-size: 4rem;
+    color: black;
+    text-shadow: 1px 1px 10px $shadow-red;
+  }
+
+  input.form-control {
+    font-size: 2rem;
+    height: 2.5rem;
+    border-radius: 4px;
+    padding-left: 1rem;
+
+    &::placeholder {
+      color: $placeholder-grey;
+    }
+
   }
 }

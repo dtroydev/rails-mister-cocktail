@@ -1,25 +1,19 @@
 // Import Google fonts
 // @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
-// @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
-// @import url('https://fonts.googleapis.com/css?family=Berkshire+Swash&display=swap');
-// @import url('https://fonts.googleapis.com/css?family=Parisienne&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Niconne&display=swap');
-// Define fonts for body and headers
-// $body-font: "Open Sans",
-// "Helvetica",
-// "sans-serif";
 
-// $headers-font: "Raleway",
-// "Helvetica",
-// "sans-serif";
+@import url('https://fonts.googleapis.com/css?family=Niconne&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono&display=swap');
 
 $body-font: 'Niconne',
 'Helvetica',
 'sans-serif';
+
 $headers-font: 'Niconne',
 'Helvetica',
-'sans-serif'
+'sans-serif';
 
+$input-font: 'Nova Mono',
+monospace;
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

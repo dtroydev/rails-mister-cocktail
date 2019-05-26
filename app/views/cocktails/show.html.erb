@@ -1,16 +1,21 @@
 <div class="cocktails-background">
   <div class="cocktails-show container">
     <div class="row justify-content-around">
-      <div class="cocktails-show-image-box">
-        <% if @cocktail.image_url %>
-          <%= image_tag @cocktail.image_url, width: 600 %>
-        <% end %>
-        <% unless @cocktail.photo.file.nil? %>
-          <%= cl_image_tag @cocktail.photo, height: 350, width: 350, crop: :fill %>
-        <% end %>
+      <div class="row flex-column">
+        <div class="cocktails-show-image-box">
+          <% if @cocktail.image_url %>
+            <%= image_tag @cocktail.image_url, width: 600 %>
+          <% end %>
+          <% unless @cocktail.photo.file.nil? %>
+            <%= cl_image_tag @cocktail.photo, height: 350, width: 350, crop: :fill %>
+          <% end %>
+        </div>
+        <div class="back-link text-center">
+          <%= link_to 'Back to Cocktails List', root_path, class: 'btn cocktails-show-back-link' %>
+        </div>
       </div>
       <div class="cocktails-show-description card" style="width: 400px">
-        <div class="card-title text-center mt-3 px-1 pt-3">
+        <div class="card-title text-center mt-3 mb-0 px-1 pt-3">
           <h3 class="cocktails-show-title"><%= @cocktail.name %></h3>
         </div>
         <div class="cocktail-instructions card-body">
@@ -33,9 +38,6 @@
               <%= f.input :ingredient_id, label: 'Ingredient *', collection: Ingredient.order('name ASC') %>
               <%= f.button :submit, class: 'btn cocktails-show-submit' %>
             <% end %>
-            <div class="back-link">
-              <%= link_to 'Go Back', root_path, class: 'btn cocktails-show-back-link' %>
-            </div>
           </div>
         </div>
       </div>
